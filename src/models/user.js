@@ -80,7 +80,6 @@ userSchema.methods.getJWT = async function () {
     );
   });
   const token = t.then((tk) => {
-    console.log(tk);
     return tk;
   });
   return token;
