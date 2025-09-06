@@ -69,7 +69,7 @@ userSchema.methods.getJWT = async function () {
     jwt.sign(
       { _id: user._id },
       "DevTinder@123",
-      { expiresIn: 15 },
+      { expiresIn: "7d" },
       (err, token) => {
         if (err) {
           reject(err);

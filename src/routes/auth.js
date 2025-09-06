@@ -3,7 +3,7 @@ const authRouter = express.Router();
 const { ValidatData } = require("../utilis/validation.js");
 const User = require("../models/user.js");
 const bcrypt = require("bcrypt");
-const getJWT = require("../models/user.js");
+// const getJWT = require("../models/user.js");
 
 // always write the things in try-catch
 authRouter.post("/signup", async (req, res) => {
@@ -36,7 +36,7 @@ authRouter.post("/login", async (req, res) => {
     const user = await User.findOne({ emailId: emailId });
 
     if (user) {
-      const pswd = await bcrypt.compare(password, user.password);
+      const pswd = bcrypt.compare(password, user.password);
 
       if (!pswd) {
         throw new Error("invalid credentials");
