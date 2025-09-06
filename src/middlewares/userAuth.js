@@ -8,6 +8,7 @@ const UserAuth = async (req, res, next) => {
       throw new Error("You need to sign in first");
     }
     const decode = jwt.verify(token, "DevTinder@123");
+
     const user = await User.findById({ _id: decode._id });
     if (!user) {
       throw new Error("User not valid");

@@ -54,8 +54,34 @@ const userSchema = new mongoose.Schema(
 userSchema.methods.getJWT = async function () {
   const user = this;
 
-  const token = await jwt.sign({ _id: user._id }, "DevTinder@123", {
-    expiresIn: "7d",
+  // const token = jwt.sign(
+  //   { _id: user._id },
+  //   "DevTinder@123",
+  //   {
+  //     expiresIn: "1d",
+  //   },
+  //   (err, token) => {
+  //     console.log("inside the get token", token);
+  //     return token;
+  //   }
+  // );
+  const t = new Promise((resolve, reject) => {
+    jwt.sign(
+      { _id: user._id },
+      "DevTinder@123",
+      { expiresIn: 15 },
+      (err, token) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(token);
+        }
+      }
+    );
+  });
+  const token = t.then((tk) => {
+    console.log(tk);
+    return tk;
   });
   return token;
 };
