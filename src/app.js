@@ -7,6 +7,7 @@ const { profileRouter } = require("./routes/profile.js");
 const { requestRouter } = require("./routes/request.js");
 const userRouter = require("./routes/user.js");
 const cors = require("cors");
+require("dotenv").config();
 
 app.use(express.json());
 app.use(cookieParser());
@@ -25,7 +26,7 @@ connectDB()
   .then(() => {
     console.log("connected to the database");
     // create the server in the specific port number
-    app.listen(8888, () => {
+    app.listen(process.env.PORT_NUMBER, () => {
       console.log("server is runnig on the port number 8888");
     });
   })

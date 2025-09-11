@@ -7,7 +7,7 @@ const UserAuth = async (req, res, next) => {
     if (!token) {
       throw new Error("You need to sign in first");
     }
-    const decode = jwt.verify(token, "DevTinder@123");
+    const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
     const user = await User.findById({ _id: decode._id });
     if (!user) {

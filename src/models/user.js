@@ -68,7 +68,7 @@ userSchema.methods.getJWT = async function () {
   const t = new Promise((resolve, reject) => {
     jwt.sign(
       { _id: user._id },
-      "DevTinder@123",
+      process.env.JWT_SECRET_KEY,
       { expiresIn: "7d" },
       (err, token) => {
         if (err) {
