@@ -3,13 +3,13 @@ const requestRouter = express.Router();
 const UserAuth = require("../middlewares/userAuth.js");
 const Connection = require("../models/connection.js");
 const User = require("../models/user.js");
+const sendEmail = require("../utilis/sendEmail.js");
 
 requestRouter.post(
   "/request/send/:status/:toId",
   UserAuth,
   async (req, res) => {
     const user = req.user;
-
     try {
       const fromUserId = user._id;
       const toUserId = req.params.toId;
@@ -41,7 +41,9 @@ requestRouter.post(
         toUserId,
         status,
       });
-      const a = await requestConnection.save();
+      requestConnection.save();
+      const emailRes = await sendEmail.run();
+
       res.send("data saved");
     } catch (err) {
       res.status(400).json({ message: err.message });
