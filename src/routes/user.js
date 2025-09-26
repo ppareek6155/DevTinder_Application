@@ -8,7 +8,6 @@ userRouter.get("/connections", UserAuth, async (req, res) => {
   const USER_SAFE_DATA = "firstName lastName skills photoUrl";
   try {
     const loggedInUser = req.user;
-
     const connectionRequest = await Connections.find({
       $or: [
         { toUserId: loggedInUser._id, status: "accepted" },

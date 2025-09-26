@@ -1,23 +1,29 @@
 const mongoose = require("mongoose");
 const user = require("../models/user.js");
 
-const requestSchema = mongoose.Schema({
-  fromUserId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "user",
+const requestSchema = mongoose.Schema(
+  {
+    fromUserId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "user",
+    },
+    toUserId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "user",
+    },
+    status: {
+      type: String,
+      required: true,
+      enum: ["ignored", "interested", "accepted", "rejected"],
+    },
+    createdDate: Date,
   },
-  toUserId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "user",
-  },
-  status: {
-    type: String,
-    required: true,
-    enum: ["ignored", "interested", "accepted", "rejected"],
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 requestSchema.index({ fromUserId: 1, toUserId: 1 });
 
