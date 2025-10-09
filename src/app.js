@@ -7,8 +7,8 @@ const { authRouter } = require("./routes/auth.js");
 const { profileRouter } = require("./routes/profile.js");
 const { requestRouter } = require("./routes/request.js");
 const userRouter = require("./routes/user.js");
-const cors = require("cors");
 require("./utilis/cronJob.js");
+const cors = require("cors");
 
 app.use(express.json());
 app.use(cookieParser());
